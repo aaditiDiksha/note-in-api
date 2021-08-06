@@ -82,6 +82,6 @@ app.post("/profile/saveTodo/:userId/:todoId", (req, res) => {
   todoItems.handleSaveTodo(req, res, data);
 });
 
-app.listen(process.nextTick.PORT || port, () => {
+app.listen(process.env.PORT || port, () => {
   console.log(`Example app listening at http://localhost:${process.env.PORT}`);
 });
