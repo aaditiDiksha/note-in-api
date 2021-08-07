@@ -47,18 +47,19 @@ const handleSaveTodo = (req, res, data) => {
         }); //map ends
       } else {
         console.log("mmm inside if");
-        data
-          .select("*")
-          .from("todoitems")
-          .where("userid", "=", userId)
-          .then((allItems) => {
-            console.log(allItems);
-            res.json(allItems);
-          })
-          .catch((err) => {
-            console.log("error in selecting all items");
-            res.status(400).json("unable to save");
-          });
+        res.json('no items')
+        // data
+        //   .select("*")
+        //   .from("todoitems")
+        //   .where("userid", "=", userId)
+        //   .then((allItems) => {
+        //     console.log(allItems);
+        //     res.json(allItems);
+        //   })
+        //   .catch((err) => {
+        //     console.log("error in selecting all items");
+        //     res.status(400).json("unable to save");
+        //   });
       }
     })
     .catch((err) => {
