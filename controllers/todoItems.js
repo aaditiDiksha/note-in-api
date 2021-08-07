@@ -9,6 +9,7 @@ console.log(listItems)
     .then((deletedItems) => {
      if(listItems === [])
     {
+      console.log('mmm inside if')
       data
         .select("*")
         .from("todoitems")
@@ -25,6 +26,8 @@ console.log(listItems)
 else{
 
   listItems.map((item) => {
+      console.log("mmm inside else");
+
     data
     .insert({
       todoid: todoId,
