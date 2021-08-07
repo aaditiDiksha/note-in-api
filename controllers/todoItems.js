@@ -9,21 +9,7 @@ const handleSaveTodo = (req, res, data) => {
     .then((deletedItems) => {
       console.log('am i even getting here')
       console.log(listItems)
-      if (listItems === [ ]) {
-        console.log("mmm inside if");
-        data
-          .select("*")
-          .from("todoitems")
-          .where("userid", "=", userId)
-          .then((allItems) => {
-            console.log(allItems);
-            res.json(allItems);
-          })
-          .catch((err) => {
-            console.log("error in selecting all items");
-            res.status(400).json("unable to save");
-          });
-      } else {
+      if (listItems !== []) {
         listItems.map((item) => {
           console.log("mmm inside else");
 
@@ -59,6 +45,20 @@ const handleSaveTodo = (req, res, data) => {
               console.log(err);
             });
         }); //map ends
+      } else {
+        console.log("mmm inside if");
+        data
+          .select("*")
+          .from("todoitems")
+          .where("userid", "=", userId)
+          .then((allItems) => {
+            console.log(allItems);
+            res.json(allItems);
+          })
+          .catch((err) => {
+            console.log("error in selecting all items");
+            res.status(400).json("unable to save");
+          });
       }
     })
     .catch((err) => {
@@ -70,3 +70,4 @@ const handleSaveTodo = (req, res, data) => {
 module.exports = {
   handleSaveTodo,
 };
+ 
