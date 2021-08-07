@@ -12,7 +12,7 @@ const todoItems = require("./controllers/todoItems");
 
 const data = knex({
   client: "pg",
-  connection: process.env.DATABASE_URL,
+  connectionString: process.env.DATABASE_URL,
   ssl: {
     rejectUnauthorized: false,
   },
