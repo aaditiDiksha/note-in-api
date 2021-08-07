@@ -7,11 +7,26 @@ const handleSaveTodo = (req, res, data) => {
     .del()
     .where("todoid", "=", todoId)
     .then((deletedItems) => {
+     if(listItems === [])
+    {
+      data
+        .select("*")
+        .from("todoitems")
+        .where("userid", "=", userId)
+        .then((allItems) => {
+          res.json(allItems);
+        })
+        .catch((err) => {
+          console.log("error in selecting all items");
+          res.status(400).json("unable to save");
+        });
+    }
+else{
 
-      listItems.map((item) => {
-        data
-          .insert({
-            todoid: todoId,
+  listItems.map((item) => {
+    data
+    .insert({
+      todoid: todoId,
             content: item.content,
             userid: userId,
             ischecked: item.ischecked,
@@ -22,23 +37,24 @@ const handleSaveTodo = (req, res, data) => {
             inc++;
             if (inc === listItems.length) {
               data
-                .select("*")
-                .from("todoitems")
-                .where("userid", "=", userId)
-                .then((allItems) => {
-                  res.json(allItems);
-                })
-                .catch((err) => {
-                  console.log("error in selecting all items");
-                  res.status(400).json("unable to save");
-                });
+              .select("*")
+              .from("todoitems")
+              .where("userid", "=", userId)
+              .then((allItems) => {
+                res.json(allItems);
+              })
+              .catch((err) => {
+                console.log("error in selecting all items");
+                res.status(400).json("unable to save");
+              });
             }
           })
           .catch((err) => {
             // error = "error in adding new todo items "
             console.log(err);
           });
-      }); //map ends
+        }); //map ends
+      }
     })
     .catch((err) => {
       console.log("cannot delete pre existing todo items");
