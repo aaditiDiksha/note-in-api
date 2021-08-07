@@ -2,7 +2,7 @@ const handleSaveTodo = (req, res, data) => {
   const { userId, todoId } = req.params;
   const { listItems } = req.body;
   var inc = 0;
-
+console.log(listItems)
   data("todoitems")
     .del()
     .where("todoid", "=", todoId)
@@ -14,6 +14,7 @@ const handleSaveTodo = (req, res, data) => {
         .from("todoitems")
         .where("userid", "=", userId)
         .then((allItems) => {
+          console.log(allItems)
           res.json(allItems);
         })
         .catch((err) => {
