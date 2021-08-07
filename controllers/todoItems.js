@@ -7,7 +7,7 @@ const handleSaveTodo = (req, res, data) => {
     .del()
     .where("todoid", "=", todoId)
     .then((deletedItems) => {
-      if (listItems !== []) {
+      if (listItems) {
         listItems.map((item) => {
 
           data
