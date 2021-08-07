@@ -7,11 +7,8 @@ const handleSaveTodo = (req, res, data) => {
     .del()
     .where("todoid", "=", todoId)
     .then((deletedItems) => {
-      console.log('am i even getting here')
-      console.log(listItems)
       if (listItems !== []) {
         listItems.map((item) => {
-          console.log("mmm inside else");
 
           data
             .insert({
@@ -31,7 +28,6 @@ const handleSaveTodo = (req, res, data) => {
                   .where("userid", "=", userId)
                   .then((allItems) => {
                     res.json(allItems);
-                    console.log("all items");
                   })
                   .catch((err) => {
                     console.log("error in selecting all items");
@@ -40,29 +36,22 @@ const handleSaveTodo = (req, res, data) => {
               }
             })
             .catch((err) => {
-              // error = "error in adding new todo items "
-              console.log("error here");
-              console.log(err);
+              console.log("error inserting");
             });
         }); //map ends
-      } else {
-        console.log("mmm inside if");
-        res.json('no items')
-        // data
-        //   .select("*")
-        //   .from("todoitems")
-        //   .where("userid", "=", userId)
-        //   .then((allItems) => {
-        //     console.log(allItems);
-        //     res.json(allItems);
-        //   })
-        //   .catch((err) => {
-        //     console.log("error in selecting all items");
-        //     res.status(400).json("unable to save");
-        //   });
       }
-      console.log('oh mannnnnnnn')
-      req.json('oh yrrrrrrrrrrrrrrr')
+        data
+          .select("*")
+          .from("todoitems")
+          .where("userid", "=", userId)
+          .then((allItems) => {
+            res.json(allItems);
+          })
+          .catch((err) => {
+            console.log("error in selecting all items");
+            res.status(400).json("unable to save");
+          });
+      
     })
     .catch((err) => {
       console.log("cannot delete pre existing todo items");
