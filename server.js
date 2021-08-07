@@ -26,9 +26,19 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 const port = 3000;
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
+app.get('/db', async (req, res) => {
+    try {
+      const client = await pool.connect();
+      const result = await client.query('SELECT * FROM test_table');
+      const results = { 'results': (result) ? result.rows : null};
+      res.render('pages/db', results );
+      client.release();
+    } catch (err) {
+      console.error(err);
+      res.send("Error " + err);
+    }
+  })
+  
 app.post("/register", (req, res) => {
   register.handleRegister(req, res, data, bcrypt);
 });
