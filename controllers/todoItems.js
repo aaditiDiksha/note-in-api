@@ -61,6 +61,8 @@ const handleSaveTodo = (req, res, data) => {
         //     res.status(400).json("unable to save");
         //   });
       }
+      console.log('oh mannnnnnnn')
+      req.json('oh yrrrrrrrrrrrrrrr')
     })
     .catch((err) => {
       console.log("cannot delete pre existing todo items");
