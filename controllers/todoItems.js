@@ -8,7 +8,8 @@ const handleSaveTodo = (req, res, data) => {
     .where("todoid", "=", todoId)
     .then((deletedItems) => {
       console.log('am i even getting here')
-      if (listItems === []) {
+      console.log(listItems)
+      if (listItems === [ ]) {
         console.log("mmm inside if");
         data
           .select("*")
