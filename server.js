@@ -28,7 +28,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 const port = 3000;
 
-app.get('/',(req,res)=>res.json('heyy') )
+app.get('/',(req,res)=>res.json('note in api ') )
   
 app.post("/register", (req, res) => {
   register.handleRegister(req, res, data, bcrypt);

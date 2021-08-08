@@ -2,7 +2,6 @@ const handleSaveTodo = (req, res, data) => {
   const { userId, todoId } = req.params;
   const { listItems } = req.body;
   var inc = 0;
-  console.log(listItems);
   data("todoitems")
     .del()
     .where("todoid", "=", todoId)
@@ -55,7 +54,7 @@ const handleSaveTodo = (req, res, data) => {
     })
     .catch((err) => {
       console.log("cannot delete pre existing todo items");
-      res.status(400).json("unable to delete");
+      res.status(400).json("unable to save");
     });
 };
 
