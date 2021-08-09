@@ -46,7 +46,7 @@ app.post("/profile/:userId/addNotebook/:notebookTitle", (req, res) => {
   notebook.handleAddNotebook(req, res, data);
 });
 
-app.post("/profile/delNotebook/:notebookId", (req, res) => {
+app.post("/profile/delNotebook/:notebookId/:userId", (req, res) => {
   notebook.handleDelNotebook(req, res, data);
 
 });

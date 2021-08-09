@@ -38,13 +38,9 @@ const handleAddNotebook = (req, res, data) => {
 };
 
 const handleDelNotebook = (req, res, data) => {
-  const { notebookId } = req.params;
+  const { notebookId, userId} = req.params;
   
-
-
-
-      
-  data
+ data
     .where("notebookid", notebookId)
     .del()
     .from("pages")
@@ -57,8 +53,9 @@ const handleDelNotebook = (req, res, data) => {
           data
             .select("*")
             .from("notebooks")
-            .then((notebooks) => {
+            .where("userid", "=", userId)
 
+            .then((notebooks) => {
               res.json(notebooks);
             })
             .catch((err) => {
